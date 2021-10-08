@@ -1,8 +1,8 @@
 # Ultimate-API
 
-:guitar: *An API for ultimate-guitar.com*
+:guitar: *An API for ultimate-guitar.com, forked from [joncardasis/ultimate-api](https://github.com/joncardasis/ultimate-api) to work in October 2021*
 
-![Python-Version](https://img.shields.io/badge/Python-3.6.1-blue.svg)
+![Python-Version](https://img.shields.io/badge/Python-3.9.7-blue.svg)
 
 ## Setup
 1. Install python3 from https://www.python.org/downloads/
@@ -24,9 +24,10 @@
 
 1. Usage:
 
-    ```Python
-    export FLASK_DEBUG=1 // Export for debug
-    python run.py
+    ```bash
+    export FLASK_DEBUG=1 // Export for debug if running Flask server
+    python run.py        // Run Flask server for multiple api requests OR
+    python fetch.py URL    // Which returns the json for a single url, then quits
     ```
 
 ## Endpoints
@@ -35,8 +36,6 @@
 | ------ | -------- | ---------- | ------ |
 | `GET`  | `/tab`   | `url`: A full (including protocol) url for an ultimate-guitar.com tab. | JSON response containing tab info as well as each tab line
 
-## Running Tests
-To run the full test suite execute the following from the top level directory.
-```Python
-python test.py
-```
+Example:
+
+`curl http://localhost:5000/tab\?url\=https://tabs.ultimate-guitar.com/tab/radiohead/creep-chords-4169`
