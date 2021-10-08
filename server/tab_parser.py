@@ -9,8 +9,7 @@ def dict_from_ultimate_tab(url: str) -> json:
     song along with the song info
     '''
     html = requests.get(url).content
-    ug_tags = ['js-tab-content', 'js-copy-content'] # tags the tabs are contained in
-    tab_dict = html_tab_to_json_dict(html, ug_tags)
+    tab_dict = html_tab_to_json_dict(html)
     return tab_dict
 
 
