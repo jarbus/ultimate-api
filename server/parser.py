@@ -1,14 +1,20 @@
 import json
+import requests
 from bs4 import BeautifulSoup
+from typing import Union
 
-def html_tab_to_json_dict(html_body: str) -> json:
+def url2dict(url: str, return_json=False) -> Union[dict, "json"]:
+
     '''
     Returns a json form of a 'pre' tag in an untimate guitar html tabs body.
 
     Parameters:
-        - html_body: The full html body of an ultimate guitar tab site
-        - pre_class_tags: An array of strings for the class names of a 'pre' tag where the chords are located to parse
+        - url: UG url to parse
+        - return_json: Whether to
     '''
+
+    html_body = requests.get(url).content
+
     soup = BeautifulSoup(html_body, "html.parser")
 
     json_string = soup.html.body.find_all("div")[2].attrs["data-content"]
@@ -19,7 +25,7 @@ def html_tab_to_json_dict(html_body: str) -> json:
     tab_metadata: dict = tab_json_data["tab"]
 
     # Extract meaingful metadata
-    info_json = {
+    info_dict = {
         'title': tab_metadata["song_name"],
         'rating': tab_metadata["rating"],
         'votes': tab_metadata["votes"],
@@ -30,4 +36,6 @@ def html_tab_to_json_dict(html_body: str) -> json:
     }
 
     # Return constructed json under a single tag
-    return {'tab': info_json}
+    if return_json:
+        return json.dumps(info_dict, ensure_ascii=False)
+    return info_dict

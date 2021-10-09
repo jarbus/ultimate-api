@@ -1,7 +1,7 @@
 from server import app
 from flask import request, jsonify
 from urllib.parse import urlparse
-from .tab_parser import dict_from_ultimate_tab
+from .parser import url2dict
 
 
 SUPPORTED_UG_URI = 'tabs.ultimate-guitar.com'
@@ -23,5 +23,5 @@ def tab():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-    tab_dict = dict_from_ultimate_tab(ultimate_url)
+    tab_dict = url2dict(ultimate_url, return_json=True)
     return jsonify(tab_dict)
