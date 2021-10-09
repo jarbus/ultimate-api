@@ -1,6 +1,6 @@
 import sys
 import json
-from server.parser import url2dict
+from server.parser import taburl2dict
 
 if __name__ == '__main__':
     try:
@@ -11,6 +11,6 @@ if __name__ == '__main__':
         print('    python %s {url}' % sys.argv[0])
         sys.exit()
 
-    tab_dict = url2dict(url, return_json=False)
+    tab_dict = taburl2dict(url, return_json=False)
     pretty_format_json = json.dumps(tab_dict, indent=4, sort_keys=True)
     print(pretty_format_json)

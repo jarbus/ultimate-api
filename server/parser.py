@@ -3,14 +3,23 @@ import requests
 from bs4 import BeautifulSoup
 from typing import Union
 
-def url2dict(url: str, return_json=False) -> Union[dict, "json"]:
-
+def taburl2dict(url: str, return_json=False) -> Union[dict, "json"]:
     '''
-    Returns a json form of a 'pre' tag in an untimate guitar html tabs body.
+    Creates a dict/json object of guitar tab information given a url
 
     Parameters:
         - url: UG url to parse
-        - return_json: Whether to
+        - return_json: Whether to return a json object or a python dictionary
+
+    Returns:
+        - Dictionary with the following attributes:
+            {'title': str
+             'rating': float
+             'votes': int
+             'version': int
+             'description': str
+             'url': str
+             'lines': str}
     '''
 
     html_body = requests.get(url).content
@@ -19,6 +28,7 @@ def url2dict(url: str, return_json=False) -> Union[dict, "json"]:
 
     json_string = soup.html.body.find_all("div")[2].attrs["data-content"]
 
+    # Separate Tab metadata from the tab sheet music
     data_content_json: dict = json.loads(json_string)
     tab_json_data: dict = data_content_json["store"]["page"]["data"]
     tab_music: str = tab_json_data["tab_view"]["wiki_tab"]["content"]
