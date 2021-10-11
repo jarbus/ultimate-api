@@ -35,7 +35,9 @@
 | Method | Endpoint |  Parameters | Result |
 | ------ | -------- | ---------- | ------ |
 | `GET`  | `/tab`   | `url`: A full (including protocol) url for an ultimate-guitar.com tab. | JSON response containing tab info as well as each tab line
+| `GET`  | `/explore` | `url`: A full (including protocol) url for a ultimate-guitar.com page of tabs. | JSON response containing a list of all tab urls on the webpage |
 
 Example:
 
 `curl http://localhost:5000/tab\?url\=https://tabs.ultimate-guitar.com/tab/radiohead/creep-chords-4169`
+`curl http://localhost:5000/explore\?url\=https://www.ultimate-guitar.com/explore\?type\[\]\=Tabs`
